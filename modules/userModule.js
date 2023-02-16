@@ -47,13 +47,12 @@ module.exports.userSignup = async (req, res) => {
 
     if (savedUser) {
       res.status(200).send({
-        msg: true,
+        token: generateJwtToken({ name: user.name, _id: user._id }),
         user: {
-          _id: savedUser._id,
-          name: savedUser.name,
-          email: savedUser.email,
-          picture: savedUser.pic,
-          token: generateJwtToken({ name, _id: savedUser._id }),
+          name: user.name,
+          email: user.email,
+          picture: user.picture,
+          _id: user._id
         },
       });
     }
